@@ -9,3 +9,9 @@
 skye = User.create(username: "testuser1")
 mason = User.create(username: "testuser2")
 mike = User.create(username: "testuser3")
+
+entry1 = JournalEntry.create(user_id: skye.id, name: "Test Entry 1", content: "This is a test entry.")
+entry2 = JournalEntry.create(user_id: skye.id, name: "Test Entry 2", content: "This is a test entry.")
+entry3 = JournalEntry.create(user_id: mason.id, name: "Test Entry 3", content: "This is a test entry.")
+entry4 = JournalEntry.create(user_id: mike.id, name: "Test Entry 4", content: "This is a test entry.")
+entry5 = JournalEntry.create(user_id: mike.id, name: "Test Entry 5", content: "This is a test entry.")
