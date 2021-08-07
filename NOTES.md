@@ -4,7 +4,7 @@ Jrnl API:
 [x]2. Create a new branch for User scaffold
 [x]3. Create User model, migration and Namespaced v1 controller
 [x]4. Test INDEX for User model, then create and create a user with JUST a username 
-[]5. Ensure User functionality works 100%
+[x]5. Ensure User functionality works 100%
 []6. CO branch and merge to master if 100%
 []7. Create a new branch for journal entry scaffold 
 []8. Create Journal model, migration and Namespaced v1 controller
