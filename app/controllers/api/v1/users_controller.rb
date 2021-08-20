@@ -5,7 +5,6 @@ class Api::V1::UsersController < ApplicationController
         options = {
             include: [:journal_entries]
         }
-
         render json: UserSerializer.new(users, options)
 
     end

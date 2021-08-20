@@ -2,7 +2,10 @@ class Api::V1::JournalEntriesController < ApplicationController
 
     def index 
         journal_entries = JournalEntry.all
-        render json: JournalEntrySerializer.new(journal_entries)
+        options = {
+            include: [:user]
+        }
+        render json: JournalEntrySerializer.new(journal_entries, options)
     end
 
     def create 
