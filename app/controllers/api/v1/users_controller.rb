@@ -2,10 +2,10 @@ class Api::V1::UsersController < ApplicationController
 
     def index 
         users = User.all
-        options = {
-            include: [:journal_entries]
-        }
-        render json: UserSerializer.new(users, options)
+        #options = {
+         #   include: [:journal_entries]
+        #}
+        render json: UserSerializer.new(users)
 
     end
 
