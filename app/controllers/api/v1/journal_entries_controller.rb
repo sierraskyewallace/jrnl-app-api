@@ -16,4 +16,10 @@ class Api::V1::JournalEntriesController < ApplicationController
             render json: { errors: journal_entry.errors.full_messages }
         end
     end
+
+    private 
+
+    def journal_entry_params
+        params.require(:journal_entry).permit(:name, :content, :user_id)
+    end
 end
