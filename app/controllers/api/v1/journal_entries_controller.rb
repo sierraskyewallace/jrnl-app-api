@@ -1,7 +1,10 @@
 class Api::V1::JournalEntriesController < ApplicationController
+    #skip_before_action :authorized, only: [:index, :create]
 
     def index 
-        journal_entries = JournalEntry.all
+        current_user = User.find_by(params[:id])
+        journal_entries = current_user.journal_entries
+        #journal_entries = JournalEntry.all
         #options = {
          #   include: [:user]
         #}
