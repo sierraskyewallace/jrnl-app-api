@@ -14,7 +14,7 @@ class Api::V1::UsersController < ApplicationController
         if user.save
             render json: { user: UserSerializer.new(user) }, status: :created
         else
-            render json: { error: "Username is already taken" }, status: :not_acceptable}
+            render json: { error: "Username is already taken" }, status: :not_acceptable
         end
     end
 
