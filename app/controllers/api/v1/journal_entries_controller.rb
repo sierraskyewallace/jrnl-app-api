@@ -19,6 +19,6 @@ class Api::V1::JournalEntriesController < ApplicationController
     private 
 
     def journal_entry_params
-        params.require(:journal_entry).permit(:name, :content, :user_id)
+        params.require(:journal_entry).permit(:name, :content, :user_id, :id)
     end
 end
