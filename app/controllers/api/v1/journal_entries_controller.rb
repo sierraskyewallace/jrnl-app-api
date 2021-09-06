@@ -1,9 +1,9 @@
 class Api::V1::JournalEntriesController < ApplicationController
     skip_before_action :authorized, only: [:index]
 
-
     def index 
-        journal_entries = JournalEntry.all
+        current_user = User.find_by_id(params[:user_id])
+        journal_entries = current_user.journal_entries
         render json: JournalEntrySerializer.new(journal_entries)
     end
 
@@ -17,6 +17,7 @@ class Api::V1::JournalEntriesController < ApplicationController
     end
 
     private 
+
 
     def journal_entry_params
         params.require(:journal_entry).permit(:name, :content)

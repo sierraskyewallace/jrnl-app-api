@@ -1,18 +1,18 @@
 class Api::V1::UsersController < ApplicationController
- skip_before_action :authorized, only: [:create]
+ skip_before_action :authorized, only: [:index,:create]
 
-    def profile
-  render json: { user: UserSerializer.new(current_user) }, status: :accepted
-  end
+
 
   def index 
-    @users = User.all
+    users = User.all
   end
 
     def create
-    @user = User.create(user_params)
-    if @user.valid?
-      render json: { user: UserSerializer.new(@user) }, status: :created
+    user = User.create(user_params)
+    if user.valid?
+      # save user to session 
+      session[:user_id] = user.id
+      render json: { user: UserSerializer.new(user) }, status: :created
     else
       render json: { error: 'failed to create user' }, status: :unprocessable_entity
     end
