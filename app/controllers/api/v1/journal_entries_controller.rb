@@ -1,5 +1,5 @@
 class Api::V1::JournalEntriesController < ApplicationController
-    skip_before_action :authorized, only: [:index]
+    #skip_before_action :authorized, only: [:index]
 
     def index 
         journal_entries = JournalEntry.all
