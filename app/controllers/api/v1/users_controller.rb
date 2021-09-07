@@ -1,4 +1,4 @@
-class UsersController < ApplicationController 
+class Api::V1::UsersController < ApplicationController 
 
   
 
@@ -10,9 +10,9 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      render json: UserSerializer.new(user), status: :created
+      render json: UserSerializer.new(@user), status: :created
     else
-      render json: { message: "Try again" }, status: :denied
+      render json: { message: "Unable to create a user. Please try again." }, status: :denied
     end
   end
 
@@ -24,9 +24,9 @@ class UsersController < ApplicationController
     @user = User.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      render json: UserSerializer.new(user), status: :created
+      render json: UserSerializer.new(@user), status: :created
     else
-      render json: { message: "try again" }, status: :denied
+      render json: { message: "Incorrect Username/Password." }, status: :denied
     end
   end
 
