@@ -1,15 +1,17 @@
 class ApplicationController < ActionController::API
     
     #check is user is current user
-    def current_user
+   def logged_in?
+        !!current_user
     end
 
-    #check if user is logged in
-    def logged_in?
-    end
+  private
 
-    #make sure currrent user is auth for page or action
-    def authorize 
-    end
+  def require_logged_in
+    redirect_to root_path unless logged_in?
+  end
 
+  def current_user
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  end
 end
