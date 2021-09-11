@@ -10,7 +10,7 @@ end
 
 
   def create
-    @user = User.new(user_params)
+    @user = User.create(user_params)
     if @user.save!
       session[:user_id] = @user.id
       render json: UserSerializer.new(@user), status: :created
