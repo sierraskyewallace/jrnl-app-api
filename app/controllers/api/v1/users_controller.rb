@@ -9,17 +9,21 @@ def new
 end
 
 
-  def create
-    @user = User.create(user_params)
-    if @user.save!
+ def create 
+    @user = User.find_by(username: user_params[:username])
+    if @user && @user.authenticate(user_params[:password])
       session[:user_id] = @user.id
-      render json: UserSerializer.new(@user), status: :created
+      render json:  UserSerializer.new(@user), status: :created
+    elsif
+        @user = User.new(user_params)
+        if @user.save!
+            session[:user_id] = @user.id
+            render json: UserSerializer.new(@user), status: :created
+        end
     else
-      render json: { message: "Unable to create a user. Please try again." }, status: :unprocessable_entity
+        render json: { message: "Error" }, status: :unprocessable_entity
     end
-  end
-
- 
+end
 
    private 
 
