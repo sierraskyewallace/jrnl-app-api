@@ -22,6 +22,21 @@ class Api::V1::JournalEntriesController < ApplicationController
         end
     end
 
+    def show 
+        current_user = User.find_by(params[:id])
+        journal_entry = current_user.journal_entries.find(params[:id])
+        render json: JournalEntrySerializer.new(journal_entry)
+    end
+    
+
+    def destroy 
+        current_user = User.find_by(params[:id])
+        journal_entry = current_user.journal_entries.find(params[:id])
+        journal_entry.destroy
+        render json: { message: "Journal entry deleted" }
+    end
+
+
     private 
 
     def current_user
