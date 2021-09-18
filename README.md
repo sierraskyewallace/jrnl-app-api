@@ -1,24 +1,16 @@
-# README
+JRNL 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Rails, Javascript, SQL.
 
-Things you may want to cover:
+JRNL is a note/journaling application.
 
-* Ruby version
+A user can...
 
-* System dependencies
+Create or login with a username and password. 
+Logout.
+Create new journal entries and read their entries.
 
-* Configuration
+This repo contains the applications API.
 
-* Database creation
+This repo contains the frontend. https://github.com/sierraskyewallace/jrnl-app-client
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
