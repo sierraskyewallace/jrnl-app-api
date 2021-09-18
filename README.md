@@ -2,7 +2,7 @@ JRNL
 
 Rails, Javascript, SQL.
 
-JRNL is a note/journaling application.
+JRNL is a Single Page note/journaling application.
 
 A user can...
 
@@ -14,3 +14,10 @@ This repo contains the applications API.
 
 This repo contains the frontend. https://github.com/sierraskyewallace/jrnl-app-client
 
+Usage:
+
+Clone into back end and front end repo.
+Run Rails s on api server.
+Run open index.html on frontend client server.
+Create and account.
+Write a journal entry.
