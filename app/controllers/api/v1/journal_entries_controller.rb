@@ -1,9 +1,8 @@
 class Api::V1::JournalEntriesController < ApplicationController
-
+   
 
     def index 
-        current_user = User.find_by(params[:id])
-        journal_entries = current_user.journal_entries
+        journal_entries = @current_user.journal_entries
         render json: JournalEntrySerializer.new(journal_entries)
     end
 
@@ -27,7 +26,7 @@ class Api::V1::JournalEntriesController < ApplicationController
         journal_entry = current_user.journal_entries.find(params[:id])
         render json: JournalEntrySerializer.new(journal_entry)
     end
-    
+
 
     def destroy 
         current_user = User.find_by(params[:id])
@@ -44,6 +43,6 @@ class Api::V1::JournalEntriesController < ApplicationController
   end
 
     def journal_entry_params
-        params.require(:journal_entry).permit(:name, :content, :user_id, :id)
+        params.require(:journal_entry).permit(:name, :content, :user_id)
     end
 end

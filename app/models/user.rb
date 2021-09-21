@@ -3,6 +3,7 @@ class User < ApplicationRecord
     has_many :journal_entries
 
    validates :username, uniqueness: true, presence: true
+   
     
 
 end
