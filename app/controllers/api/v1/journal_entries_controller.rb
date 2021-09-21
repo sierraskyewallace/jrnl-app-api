@@ -1,8 +1,8 @@
 class Api::V1::JournalEntriesController < ApplicationController
-   
+    before_action :authenticate_user!
 
     def index 
-        journal_entries = @current_user.journal_entries
+        journal_entries = current_user.journal_entries
         render json: JournalEntrySerializer.new(journal_entries)
     end
 
@@ -38,9 +38,6 @@ class Api::V1::JournalEntriesController < ApplicationController
 
     private 
 
-    def current_user
-        current_user ||= User.find(session[:user_id]) if session[:user_id]
-  end
 
     def journal_entry_params
         params.require(:journal_entry).permit(:name, :content, :user_id)

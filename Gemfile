@@ -18,6 +18,8 @@ gem 'puma', '~> 5.0'
 gem 'hirb'
 gem 'fast_jsonapi'
 gem 'devise'
+gem 'devise_token_auth'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

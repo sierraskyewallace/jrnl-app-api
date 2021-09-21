@@ -1,28 +1,36 @@
 class Api::V1::UsersController < Devise::RegistrationsController
-  respond_to :json
+    
+      def index 
+            @users = User.all 
+        end
+  
+def new
+    @user = User.new 
+end
 
-  def create
-    build_resource(sign_up_params)
-    resource.save
-    render_resource(resource)
-  end
 
-  def update
-    if current_user.update(user_params)
-      render_resource(current_user)
+ def create 
+    @user = User.find_by(email: user_params[:email])
+    if @user && @user.valid_password?(user_params[:password])
+        sign_in @user
+      #session[:user_id] = @user.id
+      render json:  UserSerializer.new(@user), status: :created
+    elsif
+        @user = User.new(user_params)
+        if @user.save!
+            sign_in @user
+            #session[:user_id] = @user.id
+            render json: UserSerializer.new(@user), status: :created
+        end
     else
-      render json: { errors: current_user.errors }, status: :unprocessable_entity
+        render json: { message: "Error" }, status: :unprocessable_entity
     end
-  end
+end
 
-  def destroy
-    current_user.destroy
-    head :no_content
-  end
+    private
 
-  private
+    def user_params
+        params.require(:user).permit(:email, :password)
+    end
 
-  def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation)
-  end
 end
