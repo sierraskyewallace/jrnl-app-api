@@ -2,13 +2,14 @@ class Api::V1::JournalEntriesController < ApplicationController
     before_action :authenticate_user!
 
     def index 
-        journal_entries = current_user.journal_entries
+        journal_entries = JournalEntry.all
         render json: JournalEntrySerializer.new(journal_entries)
     end
 
     def new 
         current_user = User.find_by(params[:id])
         journal_entry = current_user.journal_entries.build
+        render json: JournalEntrySerializer.new(journal_entry)
     end
 
     def create 
@@ -40,6 +41,6 @@ class Api::V1::JournalEntriesController < ApplicationController
 
 
     def journal_entry_params
-        params.require(:journal_entry).permit(:name, :content, :user_id)
+        params.require(:journal_entry).permit(:name, :content)
     end
 end

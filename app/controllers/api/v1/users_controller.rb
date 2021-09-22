@@ -17,12 +17,10 @@ class Api::V1::UsersController < Devise::RegistrationsController
             @user = User.find_by(email: params[:user][:email])
             if @user && @user.valid_password?(params[:user][:password])
                 session[:user_id] = @user.id
-
                 render json: UserSerializer.new(@user), status: :accepted
-
-            else
-            @user = User.create(user_params)
-            if @user.save
+            elsif
+            @user = User.new(user_params)
+            if @user.save!
                 session[:user_id] = @user.id
                 render json: UserSerializer.new(@user), status: :created
             else
