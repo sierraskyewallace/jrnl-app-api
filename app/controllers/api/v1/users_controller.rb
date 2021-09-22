@@ -12,23 +12,22 @@ class Api::V1::UsersController < Devise::RegistrationsController
         end
 
 
-        def create 
-            ## check if user is already in the database
+       def create 
+            ## check if user is already in the database and passwor matches
+
             @user = User.find_by(email: params[:user][:email])
             if @user && @user.valid_password?(params[:user][:password])
-                session[:user_id] = @user.id
-                render json: UserSerializer.new(@user), status: :accepted
-            elsif
-            @user = User.new(user_params)
-            if @user.save!
-                session[:user_id] = @user.id
-                render json: UserSerializer.new(@user), status: :created
+                render json: UserSerializer.new(@user)
             else
-                render json: {errors: @user.errors.full_messages}
+                @user = User.new(user_params)
+                if @user.save
+                    render json: UserSerializer.new(@user)
+                else
+                    render json: {errors: @user.errors.full_messages}
+                end
             end
         end
-        end
-    
+
 
 
     

@@ -1,5 +1,5 @@
 class Api::V1::JournalEntriesController < ApplicationController
-    before_action :authenticate_user!
+ 
 
     def index 
         journal_entries = JournalEntry.all
