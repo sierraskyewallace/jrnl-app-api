@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
 
 devise_for :users, :controllers => { :registrations => "api/v1/users", :sessions => "api/v1/users" }
-#devise_scope :user do
-
+devise_scope :user do
+ 
   post 'users' => 'api/v1/users#create'
     namespace :api do
       namespace :v1 do
-        #resources :users
+        #resources :users 
         resources :journal_entries, only: [:index, :create]
     end
   end
 end
-
+end
