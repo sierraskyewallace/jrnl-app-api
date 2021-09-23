@@ -1,8 +1,8 @@
 class Api::V1::JournalEntriesController < ApplicationController
-   
+   before_action :authenticate
 
     def index 
-        journal_entries = @current_user.journal_entries
+        journal_entries = current_user.journal_entries
         render json: JournalEntrySerializer.new(journal_entries)
     end
 
