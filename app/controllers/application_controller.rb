@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::API
-  
+    
+
+
     def logged_in?
         !!session[:user_id]
     end
@@ -9,7 +11,10 @@ class ApplicationController < ActionController::API
     end
 
     def authenticate
-        redirect_to '/api/v1/users' unless logged_in?
+        if !logged_in?
+            render json: { error: "Please log in" }
+        end
+
     end
     
 end

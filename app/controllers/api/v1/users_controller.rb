@@ -2,28 +2,29 @@ class Api::V1::UsersController < ApplicationController
 
         def index 
             @users = User.all 
+            render json: UserSerializer.new(@users)
         end
   
-def new
-    @user = User.new 
-end
-
-
- def create 
-    @user = User.find_by(username: user_params[:username])
-    if @user && @user.authenticate(user_params[:password])
-      session[:user_id] = @user.id
-      render json:  UserSerializer.new(@user), status: :created
-    elsif
-        @user = User.new(user_params)
-        if @user.save!
-            session[:user_id] = @user.id
-            render json: UserSerializer.new(@user), status: :created
+        def create
+            ## find user by username and sign in or create a new user if username doesnt exist
+            @user = User.find_by(params[:username])
+            if @user && @user.authenticate(params[:password])
+                session[:user_id] = @user.id
+                render json: UserSerializer.new(@user)
+            else
+                @user = User.create(user_params)
+                if @user.save!
+                    session[:user_id] = @user.id
+                    render json: UserSerializer.new(@user)
+                else
+                    render json: {errors: @user.errors.full_messages}
+                end
+            end
         end
-    else
-        render json: { message: "Error" }, status: :unprocessable_entity
-    end
-end
+
+
+ 
+
 
    private 
 
@@ -31,3 +32,4 @@ end
     params.require(:user).permit(:username, :password)
    end
 end
+
