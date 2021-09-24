@@ -13,7 +13,7 @@ class Api::V1::UsersController < ApplicationController
         def create
             ## check if user already exists and password matches and log in
             @user = User.find_by(username: user_params[:username])
-            if @user && @user.authenticate(params[:password])
+            if @user && @user.authenticate(user_params[:password])
                 session[:user_id] = @user.id
                 render json: UserSerializer.new(@user)
             else
@@ -27,16 +27,6 @@ class Api::V1::UsersController < ApplicationController
                 end
             end
         end
-
-
-            def login 
-                @user = User.find_by(username: user_params[:username])
-                if @user && @user.authenticate(user_params[:password])
-                    render json: UserSerializer.new(@user)
-                else
-                    render json: {error: "User not found"}
-                end
-            end
 
 
  
